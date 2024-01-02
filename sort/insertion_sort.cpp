@@ -1,18 +1,14 @@
 #include <vector>
 using namespace std;
 
-vector<int> insertionSort(vector<int> array) {
+void insertionSort(vector<int>& array) {
   // Write your code here.
   for (int i = 1; i < array.size(); i++) {
-    int key = array[i];
-    int j = i - 1;
-    for (; j >= 0; j--) {
-      if (array[j] < key) {
-        break;
-      }
-      array[j + 1] = array[j];
+    int j = i;
+    while (j > 0 && array[j - 1] > array[j])
+    {
+      swap(array[j - 1], array[j]);
+      j--;
     }
-    array[j + 1] = key;
   }
-  return array;
 }

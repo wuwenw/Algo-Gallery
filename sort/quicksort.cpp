@@ -1,38 +1,31 @@
-#include <vector>
-using namespace std;
-void quickSortHelper(vector<int> &array, int low, int high);
-int partition(vector<int> &array, int low, int high);
-void swap(vector<int> &array, int i, int j);
-vector<int> quickSort(vector<int> array) {
-  // Write your code here.
-  quickSortHelper(array, 0, array.size() - 1);
-  
-  return array;
-}
-
-void quickSortHelper(vector<int> &array, int low, int high) {
-  if (low < high) {
-    int pivot = partition(array, low, high);
-    quickSortHelper(array, low, pivot - 1);
-    quickSortHelper(array, pivot + 1, high);
-  }
-}
-
-int partition(vector<int> &array, int low, int high) {
-  int pivot = array[high];
-  int i = low - 1;
-  for (int j = low; j < high; j++) {
-    if (array[j] < pivot) {
-      i++;
-      swap(array, j, i);
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        quickSortHelper(nums, 0, nums.size() - 1);
+        return nums;
     }
-  }
-  swap(array, i + 1, high);
-  return i + 1;
-}
 
-void swap(vector<int> &array, int i, int j) {
-  int temp = array[i];
-  array[i] = array[j];
-  array[j] = temp;
-}
+    int partition(vector<int> &array, int low, int high, int pivot) {
+        int pivot_val = array[pivot];
+        swap(array[high], array[pivot]);
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (array[j] < pivot_val) {
+                swap(array[i], array[j]);
+                i++;
+            }
+        }
+        swap(array[i], array[high]);
+        return i;
+    }
+
+    void quickSortHelper(vector<int> &array, int low, int high) {
+        if (low < high) {
+            int pivot = low + rand() % (high - low + 1);
+            pivot = partition(array, low, high, pivot);
+            quickSortHelper(array, low, pivot - 1);
+            quickSortHelper(array, pivot + 1, high);
+        }
+    }
+
+};

@@ -1,18 +1,15 @@
 #include <vector>
 using namespace std;
 
-vector<int> selectionSort(vector<int> array) {
+void selectionSort(vector<int>& array) {
   // Write your code here.
   for (int i = 0; i < array.size(); i++) {
-    int index = i;
+    int min_index = i;
     for (int j = i + 1; j < array.size(); j++) {
-      if (array[j] < array[index]) {
-        index = j;
+      if (array[j] < array[min_index]) {
+        min_index = j;
       }
     }
-    int temp = array[i];
-    array[i] = array[index];
-    array[index] = temp;
+    swap(array[i], array[min_index]);
   }
-  return array;
 }
