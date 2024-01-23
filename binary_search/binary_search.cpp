@@ -26,7 +26,7 @@ int binarySearchFindFirst(vector<int>& nums, int target) {
 // TTT FFF
 int binarySearchFindLast(vector<int>& nums, int target) {
     auto find_last = [&](function<bool(int)> check) {
-        int l = 0, r = nums.size();
+        int l = 0, r = nums.size() - 1;
         while (l < r) {
             // nums[left] <= target
             // nums[right + 1] > target
