@@ -9,7 +9,6 @@ public:
   MinHeap(vector<int> vector) { heap = buildHeap(vector); }
 
   vector<int> buildHeap(vector<int> &vector) {
-    // Write your code here.
     int parentIndex = (vector.size() - 2)/2;
     for(int i = parentIndex; i >= 0; i--) {
       siftDown(i, vector.size() - 1, vector);
@@ -19,7 +18,6 @@ public:
   }
 
   void siftDown(int currentIdx, int endIdx, vector<int> &heap) {
-    // Write your code here.
     int left = currentIdx * 2 + 1;
     int right = currentIdx * 2 + 2;
     int swapIdx = currentIdx;
@@ -39,7 +37,6 @@ public:
   }
 
   void siftUp(int currentIdx, vector<int> &heap) {
-    // Write your code here.
     if (currentIdx <= 0 ) return;
     int parentIdx = (currentIdx - 1) / 2;
     if (heap[currentIdx] < heap[parentIdx]) {
@@ -51,12 +48,10 @@ public:
   }
 
   int peek() {
-    // Write your code here.
     return heap[0];
   }
 
   int remove() {
-    // Write your code here.
     swap(heap[0], heap[heap.size() - 1]);
     int removed = heap.back();
     heap.pop_back();
@@ -65,7 +60,6 @@ public:
   }
 
   void insert(int value) {
-    // Write your code here.
     heap.push_back(value);
     siftUp(heap.size() - 1, heap);
   }

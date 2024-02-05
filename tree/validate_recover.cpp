@@ -1,3 +1,6 @@
+// inorder. keep track of previous val and compare with cur
+// https://leetcode.com/problems/validate-binary-search-tree/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -37,20 +40,7 @@ public:
     }
 };
 
-// inorder. keep track of previous val and compare with cur
-// https://leetcode.com/problems/validate-binary-search-tree/
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// recover
 class Solution {
     TreeNode* x = nullptr;
     TreeNode* y = nullptr;
@@ -87,4 +77,3 @@ public:
         b->val = tmp;
     }
 };
-// recover

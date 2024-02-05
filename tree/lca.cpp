@@ -1,3 +1,106 @@
+// O(nlogn) total runtime, and log n for each query
+/* 
+ * @lc app=leetcode id=1483 lang=cpp
+ * @lcpr version=30113
+ *
+ * [1483] Kth Ancestor of a Tree Node
+ */
+
+
+// @lcpr-template-start
+using namespace std;
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <climits>
+#include <deque>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <queue>
+#include <stack>
+#include <tuple>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
+// @lcpr-template-end
+// @lc code=start
+class TreeAncestor {
+    vector<vector<int>> pa;
+    vector<int> depth;
+public:
+    TreeAncestor(vector<vector<int>>& edges) {
+        int n = edges.size() + 1;
+        // calculate binary length
+        int m = 32 - __builtin_clz(n);
+
+        vector<vector<int>> graph(n);
+        for (auto& edge: edges) {
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+        }
+
+        depth.resize(n);
+        pa.resize(n, vector<int>(m, -1));
+        function<void(int, int)> dfs = [&](int x, int fa) {
+            pa[x][0] = fa;
+            for (int y: graph[x]) {
+                if (y != fa) {
+                    depth[y] = depth[x] + 1;
+                    dfs(y, x);
+                }
+            }
+
+        };
+        dfs(0, -1);
+
+        // try to get 2^(i+1) th 2^i father from 2^i node
+        for (int i = 0; i < m - 1; i++) {
+            for (int j = 0; j < n; j++) {
+                if (int p = pa[j][i]; p != -1)
+                    pa[j][i + 1] = pa[p][i];
+            }
+        }
+    }
+    
+    int getKthAncestor(int node, int k) {
+        for (; k > 0 && node != -1; k &= k - 1) {
+            node = pa[node][__builtin_ctz(k)];
+        }
+        return node;
+    }
+
+    int getLCA(int x, int y) {
+        if (depth[x] > depth[y]) {
+            swap(x, y);
+        }
+
+        y = getKthAncestor(y, depth[y] - depth[x]);
+
+        if (y == x)
+            return x;
+        
+        for (int i = pa.size() - 1; i >=0; i--) {
+            int px = pa[x][i], py = pa[y][i];
+            if (px != py) {
+                x = px;
+                y = py;
+            }
+        }
+        return pa[x][0];
+    }
+};
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * TreeAncestor* obj = new TreeAncestor(n, parent);
+ * int param_1 = obj->getKthAncestor(node,k);
+ */
+// @lc code=end
+
+
+// O(n) solution
 // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/submissions/
 
 /**
