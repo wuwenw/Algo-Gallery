@@ -1,0 +1,17 @@
+{
+	"cp-extension": {
+		"prefix": [
+			"cpp-cp"
+		],
+		"body": [
+			"#include <bits/stdc++.h>",
+			"#include \"leetcode.h\"",
+			"using namespace std;",
+			"\nclass Solution {};\n",
+			"int main()\n{\n\tios_base::sync_with_stdio(false);",
+			"\tSolution solution;",
+			"}",
+		],
+		"description": "cpp for leetcode"
+	}
+}

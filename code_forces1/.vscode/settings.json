@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.mdx": "markdown",
+        "*.hql": "sql",
+        "array": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "variant": "cpp",
+        "ostream": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "random": "cpp",
+        "ratio": "cpp"
+    }
+}

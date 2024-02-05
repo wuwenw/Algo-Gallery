@@ -1,0 +1,18 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-c",
+      "-g",
+      "-std=c++17",
+      "-O2",
+      "-fsanitize=address",
+      "-o",
+      "main",
+      "main.cpp"
+    ],
+    "directory": "/Users/clark/Desktop/cppstarter",
+    "file": "/Users/clark/Desktop/cppstarter/main.cpp",
+    "output": "/Users/clark/Desktop/cppstarter/main"
+  }
+]
