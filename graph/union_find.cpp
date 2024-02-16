@@ -2,59 +2,68 @@
 // https://leetcode.com/problems/number-of-provinces/
 
 class Solution {
-    struct UnionSet
-    {
-        unordered_map<int, int> parent;
-        int num_city = 0;
-
-        void add(int x)
-        {
-            if (parent.count(x) == 0)
-            {
-                parent[x] = -1;
-                ++num_city;
+    struct UnionSet {
+        vector<size_t> pa, size;
+        int num;
+        explicit UnionSet(size_t capacity): pa(capacity), size(capacity, 1), num(capacity) { 
+            iota(pa.begin(), pa.end(), 0);
+        }
+        size_t find(size_t x) { return pa[x] == x ? x : pa[x] = find(pa[x]); }
+        bool isConnected(size_t x, size_t y) { return find(x) == find(y); }
+        void merge(size_t x, size_t y) { 
+            x = find(x);
+            y = find(y);
+            if (x != y) {
+                if (x < y) swap(x, y);
+                pa[y] = x;
+                size[x] += size[y];
+                --num;
             }
         }
+        // delete and move https://oi-wiki.org/ds/dsu/#%E5%88%A0%E9%99%A4
+    };
 
-        int find(int x)
-        {   
-            if (parent.find(x) == parent.end())
-                return -1;
-            // x is not the root
-            int root = x;
-            while (parent[root] != -1)
-                root = parent[root];
-            while (x != root)
-            {
-                int original = parent[x];
-                parent[x] = root;
-                x = original;
-            }
-            return root;
+    struct UnionSet1 {
+        unordered_map<int, int> pa;
+        int num = 0;
+        explicit UnionSet1(size_t capacity) {
+            pa.reserve(capacity);
         }
-
-        void merge(int x, int y)
-        {
-            int root_x = find(x);
-            int root_y = find(y);
-
-            if (root_x != root_y)
-            {
-                parent[root_x] = root_y;
-                --num_city;
+        void add(int x) {
+            if (!pa.contains(x)) {
+                pa[x] = x;
+                ++num;
+            }
+        }
+        int find(int x) {
+            // no need if we can ensure all x are added before find()
+            if (!pa.contains(x)) {
+                add(x);
+                return x;
+            }
+            if (pa[x] == x)
+                return x;
+            return pa[x] = find(pa[x]);
+        }
+        bool isConnected(int x, int y) { return find(x) == find(y); }
+        void merge(int x, int y) {
+            x = find(x);
+            y = find(y);
+            if (x != y) {
+                if (x < y) swap(x, y);
+                pa[y] = x;
+                --num;
             }
         }
     };
 
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-        UnionSet us;
-        for (int i = 0; i < isConnected.size(); ++i)
-        {
-            for (int j = 0; j < isConnected[0].size(); ++j)
-            {
-                if (isConnected[i][j])
-                {
+        size_t n = isConnected.size();
+        UnionSet1 us(n);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (isConnected[i][j]) {
                     us.add(i);
                     us.add(j);
                     us.merge(i, j);
@@ -62,6 +71,6 @@ public:
             }
         }
         
-        return us.num_city;
+        return us.num;
     }
 };
