@@ -1,1 +1,1 @@
-# coding-template
+# Algo-Gallery
