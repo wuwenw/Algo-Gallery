@@ -1,31 +1,4 @@
 // O(nlogn) total runtime, and log n for each query
-/* 
- * @lc app=leetcode id=1483 lang=cpp
- * @lcpr version=30113
- *
- * [1483] Kth Ancestor of a Tree Node
- */
-
-
-// @lcpr-template-start
-using namespace std;
-#include <algorithm>
-#include <array>
-#include <bitset>
-#include <climits>
-#include <deque>
-#include <functional>
-#include <iostream>
-#include <list>
-#include <queue>
-#include <stack>
-#include <tuple>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-// @lcpr-template-end
-// @lc code=start
 class TreeAncestor {
     vector<vector<int>> pa;
     vector<int> depth;
@@ -92,16 +65,8 @@ public:
     }
 };
 
-/**
- * Your TreeAncestor object will be instantiated and called as such:
- * TreeAncestor* obj = new TreeAncestor(n, parent);
- * int param_1 = obj->getKthAncestor(node,k);
- */
-// @lc code=end
-
-
 // O(n) solution
-// https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/submissions/
+// https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
 /**
  * Definition for a binary tree node.
