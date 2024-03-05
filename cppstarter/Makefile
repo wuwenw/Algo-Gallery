@@ -1,5 +1,5 @@
 CXX = clang++
-CXXFLAGS = -g -std=c++17 -O2  -fsanitize=address
+CXXFLAGS = -g -std=c++20 -O2  -fsanitize=address
 TARGET := main
 
 .PHONY: all run clean

@@ -13,6 +13,7 @@
         "vector": "cpp",
         "iosfwd": "cpp",
         "random": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "iostream": "cpp"
     }
 }
