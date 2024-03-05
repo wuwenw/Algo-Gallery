@@ -1,48 +1,48 @@
 #include <vector>
 using namespace std;
 
-
 class MinHeap {
 public:
   vector<int> heap;
 
-  MinHeap(vector<int> vector) { heap = buildHeap(vector); }
+  MinHeap(vector<int> &input) { heap = buildHeap(input); }
 
-  vector<int> buildHeap(vector<int> &vector) {
-    int parentIndex = (vector.size() - 2)/2;
-    for(int i = parentIndex; i >= 0; i--) {
-      siftDown(i, vector.size() - 1, vector);
+  vector<int> buildHeap(vector<int> &input) {
+    int n = input.size();
+    int parent = (n - 2)/2;
+    for(int i = parent; i >= 0; i--) {
+      siftDown(i, n - 1, input);
     }
     
-    return vector;
+    return input;
   }
 
-  void siftDown(int currentIdx, int endIdx, vector<int> &heap) {
-    int left = currentIdx * 2 + 1;
-    int right = currentIdx * 2 + 2;
-    int swapIdx = currentIdx;
-    if (left <= endIdx && heap[left] < heap[swapIdx]) {
-      swapIdx = left;
+  void siftDown(int current, int end, vector<int> &heap) {
+    int left = current * 2 + 1;
+    int right = current * 2 + 2;
+    int swap_index = current;
+    if (left <= end && heap[left] < heap[swap_index]) {
+      swap_index = left;
     }
 
-    if (right <= endIdx && heap[right] < heap[swapIdx]) {
-      swapIdx = right;
+    if (right <= end && heap[right] < heap[swap_index]) {
+      swap_index = right;
     }
 
-    if (swapIdx != currentIdx) {
-      swap(heap[swapIdx], heap[currentIdx]);
-      siftDown(swapIdx, endIdx, heap);
+    if (swap_index != current) {
+      swap(heap[swap_index], heap[current]);
+      siftDown(swap_index, end, heap);
     }
     
   }
 
-  void siftUp(int currentIdx, vector<int> &heap) {
-    if (currentIdx <= 0 ) return;
-    int parentIdx = (currentIdx - 1) / 2;
-    if (heap[currentIdx] < heap[parentIdx]) {
-      swap(heap[currentIdx], heap[parentIdx]);
-      currentIdx = parentIdx;
-      siftUp(currentIdx, heap);
+  void siftUp(int current, vector<int> &heap) {
+    if (current <= 0 ) return;
+    int parent = (current - 1) / 2;
+    if (heap[current] < heap[parent]) {
+      swap(heap[current], heap[parent]);
+      current = parent;
+      siftUp(current, heap);
     }
     
   }
