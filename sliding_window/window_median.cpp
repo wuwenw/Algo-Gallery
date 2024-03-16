@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/sliding-window-median/
+// Lazy deleting heap
 class Solution {
     struct Item{
         int val = 0;
