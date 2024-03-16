@@ -1,7 +1,9 @@
 Stop learning useless algorithms, go and learn how to use binary search
+
+
 --
 --
-二分搜索的前提在于单调性，关键在于循环不变量。
+二分搜索的前提在于单调性，关键在于循环不变量。   
 比如，将由n个元素组成的数组`A`排序后，其具有单调递增（递减）的特性。此时应用二分搜索来寻找第一个大于等于`tar`的下标`i`，将不变量从两端不断向内循环，直到边界条件。
 
 ```
@@ -30,7 +32,7 @@ A 1 3 5 8 9
 ```
 --
 --
-二分搜索有三种写法，效果相同，可随意选择。
+二分搜索有三种写法，效果相同，可随意选择。   
 Q1 寻找单调区间内第一个满足条件的目标，即上文所述`FFFTTT`的情况。
 ```
 int tar = 5;
@@ -76,7 +78,7 @@ while(l < r) {
 return l
 
 ```
-开区间
+开区间   
 `略`
 
 C++STL提供了函数std::lower_bound, 来寻找第一个不在tar之前的iterator
@@ -135,7 +137,7 @@ while(l < r) {
 return l
 
 ```
-开区间
+开区间   
 `略`
 
 C++ STL提供了函数std::upper_bound, 来寻找第一个在tar之后的iterator

@@ -1,53 +1,48 @@
-class TrieNode {
-      public:
-        vector<TrieNode*> children;
-        int is_word;
-        TrieNode() {
-            children = vector<TrieNode*>(26, nullptr);
-            is_word = false;
-        }
-    };
-
+// https://leetcode.com/problems/implement-trie-prefix-tree/
 class Trie {
+    struct Node {
+        Node* sons[26]{};
+        bool is_word = false;
+    };
 public:
     Trie() {
-        root = new TrieNode();
+        root = new Node();
     }
     
-    void insert(string word) {
-        TrieNode* node = root;
-        for (int i = 0; i < word.size(); i++) {
-            if(node->children[word[i] - 'a'] == nullptr) {
-                node->children[word[i] - 'a'] = new TrieNode();
-            }
-            node = node->children[word[i] - 'a'];
+    void insert(string& word) {
+        auto cur = root;
+        for (char c: word) {
+            c -= 'a';
+            if (cur->sons[c] == nullptr)
+                cur->sons[c] = new Node();
+            cur = cur->sons[c];
         }
-        node->is_word = true;
+        cur->is_word = true;
     }
     
-    bool search(string word) {
-        TrieNode* node = root;
-        for (int i = 0; i < word.size(); i++) {
-            if(node->children[word[i] - 'a'] == nullptr) {
+    bool search(string& word) {
+        auto cur = root;
+        for (char c: word) {
+            c -= 'a';
+            if (cur->sons[c] == nullptr)
                 return false;
-            }
-            node = node->children[word[i] - 'a'];
+            cur = cur->sons[c];
         }
-        return node->is_word;
+        return cur->is_word;
     }
     
-    bool startsWith(string prefix) {
-        TrieNode* node = root;
-        for (int i = 0; i < prefix.size(); i++) {
-            if(node->children[prefix[i] - 'a'] == nullptr) {
+    bool startsWith(string& prefix) {
+        auto cur = root;
+        for (char c: prefix) {
+            c -= 'a';
+            if (cur->sons[c] == nullptr)
                 return false;
-            }
-            node = node->children[prefix[i] - 'a'];
+            cur = cur->sons[c];
         }
         return true;
     }
-    private:
-    TrieNode* root;
+private:
+    Node* root;
 };
 
 /**
