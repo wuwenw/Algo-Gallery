@@ -1,5 +1,5 @@
 // O(n)
-vector<int> z_function(const string& s) {
+vector<int> z_function(const vector<int>& s) {
     int n = s.size();
     vector<int> z(n);
     // left and right of zbox
@@ -12,10 +12,9 @@ vector<int> z_function(const string& s) {
         }
         // brute force match towards the end
         while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
-            l = i;
-            r = i + z[i];
             z[i]++;
         }
+        if (i + z[i] - 1 > r) l = i, r = i + z[i] - 1;
     }
     return z;
 }
